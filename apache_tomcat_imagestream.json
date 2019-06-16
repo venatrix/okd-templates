@@ -28,7 +28,7 @@
             },
             "from": {
               "kind": "DockerImage",
-              "name": "docker.io/venatrix/tomcat-s2i-okd:latest"
+              "name": "quay.io/venatrix/tomcat-s2i-okd:latest"
             }
 		   },
           {
@@ -41,7 +41,7 @@
             },
             "from": {
               "kind": "DockerImage",
-              "name": "docker.io/venatrix/tomcat-s2i-okd:9.0"
+              "name": "quay.io/venatrix/tomcat-s2i-okd:9.0"
             }
 		   },
 		   {
@@ -54,7 +54,7 @@
             },
             "from": {
               "kind": "DockerImage",
-              "name": "docker.io/venatrix/tomcat-s2i-okd:8.5"
+              "name": "quay.io/venatrix/tomcat-s2i-okd:8.5"
             }
 		   }, 
 			{
@@ -67,7 +67,7 @@
             },
             "from": {
               "kind": "DockerImage",
-              "name": "docker.io/venatrix/tomcat-s2i-okd:7.0"
+              "name": "quay.io/venatrix/tomcat-s2i-okd:7.0"
             }
           }
         ]
