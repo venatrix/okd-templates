@@ -1,0 +1,77 @@
+{
+  "kind": "ImageStreamList",
+  "apiVersion": "v1",
+  "metadata": {},
+  "items": [
+    {
+      "kind": "ImageStream",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "tomcat",
+        "annotations": {
+            "openshift.io/display-name": "Apache Tomcat",
+			"openshift.io/provider-display-name": "Apache Software Foundation.",
+			"tags": "builder,tomcat,java,hidden",
+            "description": "Apache Tomcat - Open Source Web Server Tool to deploy WAR developed by the Apache Software Foundation.\n Tomcat S2I contains Java-1.8.0-openjdk and Apache-maven-3.6.1",
+			"iconClass": "icon-tomcat"
+        }
+      },
+      "spec": {
+        "tags": [
+		  {
+            "name": "latest",
+            "annotations": {
+              "openshift.io/display-name": "Tomcat (latest)",
+              "description": "The Apache Tomcat® software is an open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies.",
+              "iconClass": "icon-tomcat",
+              "tags": "builder,tomcat,java,hidden"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "docker.io/venatrix/tomcat-s2i-okd:latest"
+            }
+		   },
+          {
+            "name": "9.0",
+            "annotations": {
+              "openshift.io/display-name": "Tomcat (9.0)",
+              "description": "The Apache Tomcat® software is an open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies.",
+              "iconClass": "icon-tomcat",
+              "tags": "builder,tomcat,java,hidden"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "docker.io/venatrix/tomcat-s2i-okd:9.0"
+            }
+		   },
+		   {
+            "name": "8.5",
+            "annotations": {
+              "openshift.io/display-name": "Tomcat (8.5)",
+              "description": "The Apache Tomcat® software is an open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies.",
+              "iconClass": "icon-tomcat",
+              "tags": "builder,tomcat,java,hidden"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "docker.io/venatrix/tomcat-s2i-okd:8.5"
+            }
+		   }, 
+			{
+            "name": "7.0",
+            "annotations": {
+              "openshift.io/display-name": "Tomcat (7.0)",
+              "description": "The Apache Tomcat® software is an open source implementation of the Java Servlet, JavaServer Pages, Java Expression Language and Java WebSocket technologies.",
+              "iconClass": "icon-tomcat",
+              "tags": "builder,tomcat,java,hidden"
+            },
+            "from": {
+              "kind": "DockerImage",
+              "name": "docker.io/venatrix/tomcat-s2i-okd:7.0"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
