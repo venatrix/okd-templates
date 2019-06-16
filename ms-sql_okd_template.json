@@ -1,0 +1,222 @@
+{
+    "kind": "Template",
+    "apiVersion": "v1",
+    "metadata": {
+        "name": "mssql-db",
+        "annotations": {
+            "openshift.io/display-name": "Microsoft SQL Server",
+			"openshift.io/provider-display-name": "Microsoft Corporation.",
+			"tags": "database,mssql",
+            "description": "Relational database management system developed by Microsoft."
+        }
+    },
+    "objects": [
+        {
+            "kind": "Secret",
+            "apiVersion": "v1",
+            "stringData": {
+                "MSSQL_SA_PASSWORD": "${MSSQL_SA_PASSWORD}"
+            },
+            "metadata": {
+                "name": "${NAME}-secret"
+            }
+        },
+        {
+            "kind": "Service",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "${NAME}",
+                "annotations": {
+                    "description": "Exposes the server"
+                }
+            },
+            "spec": {
+                "ports": [
+                    {
+                        "name": "tcp",
+                        "port": 1433,
+                        "targetPort": 1433
+                    }
+                ],
+                "selector": {
+                    "name": "${NAME}"
+                }
+            }
+        },
+        {
+            "kind": "DeploymentConfig",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "${NAME}",
+                "annotations": {
+                    "description": "Defines how to deploy the database server"
+                }
+            },
+            "spec": {
+                "strategy": {
+                    "type": "Rolling"
+                },
+                "triggers": [
+                    {
+                        "type": "ImageChange",
+                        "imageChangeParams": {
+                            "automatic": true,
+                            "containerNames": [
+                                "sql-db"
+                            ],
+                            "from": {
+                                "kind": "ImageStreamTag",
+								"namespace": "${NAMESPACE}",
+                                "name": "mssql:${MSSQL_VERSION}"
+                                
+                            }
+                        }
+                    },
+                    {
+                        "type": "ConfigChange"
+                    }
+                ],
+                "replicas": 1,
+                "selector": {
+                    "name": "${NAME}"
+                },
+                "template": {
+                    "metadata": {
+                        "name": "${NAME}",
+                        "labels": {
+                            "name": "${NAME}"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "sql-db",
+                                "image": " ",
+                                "ports": [
+                                    {
+                                        "containerPort": 1433
+                                    }
+                                ],
+                                "resources": {
+                                    "limits": {
+                                        "memory": "${MEMORY_LIMIT}"
+                                    }
+                                },
+                                "volumeMounts": [
+                                    {
+                                        "mountPath": "/var/opt/mssql",
+                                        "name": "mssql-data"
+                                    }
+                                ],
+                                "env": [
+                                    {
+                                        "name": "ACCEPT_EULA",
+                                        "value": "${ACCEPT_EULA}"
+                                    },
+									{
+                                        "name": "MSSQL_PID",
+                                        "value": "${MSSQL_PID}"
+                                    },
+									{
+                                        "name": "MSSQL_AGENT_ENABLED",
+                                        "value": "${MSSQL_AGENT_ENABLED}"
+                                    },
+                                    {
+                                        "name": "MSSQL_SA_PASSWORD",
+                                        "valueFrom": {
+                                            "secretKeyRef": {
+                                                "name": "${NAME}-secret",
+                                                "key": "MSSQL_SA_PASSWORD"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "volumes": [
+                            {
+                                "name": "mssql-data",
+                                "persistentVolumeClaim": {
+                                    "claimName": "${NAME}-data"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "kind": "PersistentVolumeClaim",
+            "apiVersion": "v1",
+            "metadata": {
+                "name": "${NAME}-data"
+            },
+            "spec": {
+                "accessModes": [
+                    "ReadWriteOnce"
+                ],
+                "resources": {
+                    "requests": {
+                        "storage": "${VOLUME_CAPACITY}"
+                    }
+                }
+            }
+        }
+    ],
+    "parameters": [
+        {
+            "name": "NAME",
+            "displayName": "Name",
+            "description": "The name assigned to all of the frontend objects defined in this template.",
+            "required": true,
+            "value": "mssql-db"
+        },
+        {
+            "name": "MEMORY_LIMIT",
+            "displayName": "Memory Limit",
+            "description": "Maximum amount of memory the container can use, e.g. 512Mi, 2Gi.",
+            "required": true,
+            "value": "4Gi"
+        },
+		{
+            "name": "MSSQL_VERSION",
+            "displayName": "Microsoft SQL Server Image",
+			"description": "The SQL Server image tag (latest, 2017-latest, 2017-GA-ubuntu, 2017-latest-ubuntu, latest-ubuntu, 2019-latest).",
+            "required": true,
+            "value": "2017-latest"
+        },
+				{
+            "name": "MSSQL_PID",
+            "displayName": "MSSQL_PID",
+			"description": "<your_product_id | edition_name> (default: Developer).",
+            "required": true,
+            "value": "Developer"
+        },
+        {
+            "name": "NAMESPACE",
+            "displayName": "Namespace",
+            "description": "The OpenShift namespace where the SQL Server image resides.",
+            "required": true,
+            "value": "openshift"
+        },
+        {
+            "name": "MSSQL_SA_PASSWORD",
+            "displayName": "Administrator Password",
+            "generate": "expression",
+            "from": "aA1[a-zA-Z0-9]{8}"
+        },
+        {
+            "name": "ACCEPT_EULA",
+            "displayName": "Accept the End-User Licensing Agreement",
+            "description": "'Y' to accept the EULA (https://go.microsoft.com/fwlink/?linkid=857698).",
+            "required": true
+        },
+        {
+            "name": "VOLUME_CAPACITY",
+            "displayName": "Persistent Volume Capacity",
+            "description": "Volume space available for data, e.g. 512Mi, 2Gi",
+            "value": "5Gi",
+            "required": true
+        }
+    ]
+}
