@@ -44,7 +44,7 @@
             },
             "from": {
               "kind": "DockerImage",
-              "name": "venatrix/mssql:latest",
+              "name": "quay.io/venatrix/mssql:latest",
 			  "referencePolicy": {
               "type": "Local"
             }  
@@ -60,7 +60,7 @@
             },
             "from": {
               "kind": "DockerImage",
-              "name": "venatrix/mssql:2017-latest-ubuntu"
+              "name": "quay.io/venatrix/mssql:2017-latest-ubuntu"
             }
 		   },
 			{
@@ -73,7 +73,7 @@
             },
             "from": {
               "kind": "DockerImage",
-              "name": "venatrix/mssql:2019-latest",
+              "name": "quay.io/venatrix/mssql:2019-latest",
 			  "referencePolicy": {
               "type": "Local"
             }
