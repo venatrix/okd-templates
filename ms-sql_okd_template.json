@@ -8,7 +8,7 @@
                 "openshift.io/display-name": "Microsoft SQL Server",
 		"openshift.io/provider-display-name": "Microsoft Corporation.",
 		"tags": "database,mssql",
-                "description": "Relational database management system developed by Microsoft."
+                "description": " Microsoft SQL Server is a relational database management system developed by Microsoft. As a database server, it is a software product with the primary function of storing and retrieving data as requested by other software applications"
         }
     },
     "objects": [
