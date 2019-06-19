@@ -4,10 +4,11 @@
     "metadata": {
         "name": "mssql-db",
         "annotations": {
-            "openshift.io/display-name": "Microsoft SQL Server",
-			"openshift.io/provider-display-name": "Microsoft Corporation.",
-			"tags": "database,mssql",
-            "description": "Relational database management system developed by Microsoft."
+		"iconClass": "icon-mssql",
+                "openshift.io/display-name": "Microsoft SQL Server",
+		"openshift.io/provider-display-name": "Microsoft Corporation.",
+		"tags": "database,mssql",
+                "description": "Relational database management system developed by Microsoft."
         }
     },
     "objects": [
