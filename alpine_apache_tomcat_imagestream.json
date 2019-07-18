@@ -7,7 +7,7 @@
       "kind": "ImageStream",
       "apiVersion": "v1",
       "metadata": {
-        "name": "tomcat",
+        "name": "alpine-tomcat",
         "annotations": {
             "openshift.io/display-name": "Alpine - Apache Tomcat",
 			"openshift.io/provider-display-name": "Apache Software Foundation.",
