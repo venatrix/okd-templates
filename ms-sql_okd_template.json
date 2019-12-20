@@ -182,7 +182,7 @@
 		{
             "name": "MSSQL_VERSION",
             "displayName": "Microsoft SQL Server Image",
-			"description": "The SQL Server image tag (latest, 2017-latest-ubuntu, 2019-latest).",
+			"description": "The SQL Server image tag (2017-latest, 2019-latest).",
             "required": true,
             "value": "2017-latest"
         },
