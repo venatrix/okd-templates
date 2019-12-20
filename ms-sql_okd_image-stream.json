@@ -21,7 +21,7 @@
 		{
             "name": "latest",
             "annotations": {
-              "openshift.io/display-name": "MsSql (Latest)",
+              "openshift.io/display-name": "MSSql (Latest)",
               "description": "Relational database management system developed by Microsoft.",
               "iconClass": "icon-mssql",
               "tags": "database,mssql"
@@ -37,14 +37,14 @@
 		  {
             "name": "latest",
             "annotations": {
-              "openshift.io/display-name": "MsSql (latest)",
+              "openshift.io/display-name": "MSSql (latest)",
               "description": "Relational database management system developed by Microsoft.",
               "iconClass": "icon-mssql",
               "tags": "database,mssql"
             },
             "from": {
               "kind": "DockerImage",
-              "name": "quay.io/venatrix/mssql:latest",
+              "name": "mcr.microsoft.com/mssql/server:latest",
 			  "referencePolicy": {
               "type": "Local"
             }  
@@ -53,7 +53,7 @@
           {
             "name": "2017-latest",
             "annotations": {
-              "openshift.io/display-name": "MsSql (2017-latest-ubuntu)",
+              "openshift.io/display-name": "MSSql (2017-latest-ubuntu)",
               "description": "Relational database management system developed by Microsoft.",
               "iconClass": "icon-mssql",
               "tags": "database,mssql"
@@ -66,7 +66,7 @@
 			{
             "name": "2019-latest",
             "annotations": {
-              "openshift.io/display-name": "MsSql (2019-latest)",
+              "openshift.io/display-name": "MSSql (2019-latest)",
               "description": "Relational database management system developed by Microsoft.",
               "iconClass": "icon-mssql",
               "tags": "database,mssql"
